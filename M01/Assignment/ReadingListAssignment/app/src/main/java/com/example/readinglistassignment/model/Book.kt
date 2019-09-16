@@ -1,4 +1,4 @@
-package com.example.readinglistassignment
+package com.example.readinglistassignment.model
 
 //TODO 1 #### Book
 //
