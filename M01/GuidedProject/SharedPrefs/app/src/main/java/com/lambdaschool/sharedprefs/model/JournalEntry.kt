@@ -56,6 +56,11 @@ class JournalEntry : Serializable {
 
     // TODO: 23. One approach to save an object into a String
     // converting our object into a csv string that we can handle in a constructor
+    fun toCSVString(): String{
+        return "$id,$date,$dayRating,${entryText?.replace(",", "@")},${if (image.isNullOrBlank()) "unused" else image} "
+
+        //CSV STRING "1, 20190916, 5, This is today's entry, image.gif a quick and dirty object store
+    }
 
     private fun initializeDate() {
         val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US)
