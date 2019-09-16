@@ -1,19 +1,40 @@
-package com.example.readinglistassignment
+package com.example.readinglistassignment.view
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
+import com.example.readinglistassignment.Book
+import com.example.readinglistassignment.R
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
+
+
+    val listOfBooks = mutableListOf<Book>(
+        Book("Childhoods End",
+            "Created in the 50s this book was an inspiration for Independence day the movie ",
+            true, "007"),
+        Book("Ready Player One", "It is chock full of 80s references", true, "9000")
+
+
+    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        for (book in listOfBooks){
+            linear_layout_list.addView(buildItemView(book))
+        }
+
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -36,4 +57,20 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
+
+
+    fun buildItemView(book: Book): View {
+
+        val myView = TextView(this)
+        myView.text = book.title
+        myView.textSize = 15f
+        return myView
+
+
+    }
+
+
+
 }

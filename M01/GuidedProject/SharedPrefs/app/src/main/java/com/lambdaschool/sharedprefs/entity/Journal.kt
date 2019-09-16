@@ -15,8 +15,6 @@ class Journal {
             return JournalEntry(JournalEntry.INVALID_ID)
         }
 
-
-
         fun createJournalEntry(text: String): JournalEntry {
             val entry = createJournalEntry()
             entry.entryText = text

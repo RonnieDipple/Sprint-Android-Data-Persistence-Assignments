@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+#### MainActivity
+
+1. Build your `MainActivity` layout file with a `ScrollView` and a `Button`
+
+> Make sure the `ScrollView` has a `ViewGroup` child with an id for you to add views to
+
+2. Write a `buildItemView` method which will accept a `Book` object and return a custom view to display information about the book.
+
+> Typically these views will just show the title of the book. In the next couple weeks, we'll show you how to define custom layouts for lists
+
+3. Hardcode a list of `Book` objects to test your methods. Be sure to add all views returned from your `buildItemView` method to the `ScrollView`'s child using `.addView(View)`
+4. Test your app.
+
+####
+
+ -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MainActivity"
+    tools:context=".view.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/linear_layout_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
