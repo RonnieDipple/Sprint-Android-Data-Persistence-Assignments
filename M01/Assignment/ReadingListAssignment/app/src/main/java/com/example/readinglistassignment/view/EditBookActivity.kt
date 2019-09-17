@@ -75,9 +75,9 @@ class EditBookActivity : AppCompatActivity() {
             bookObject.id!!
         )
 
-        val csv = Book(bookObject2.toString())
+
         val intent = Intent()
-        intent.putExtra("csv", csv.toString())
+        intent.putExtra("csv", bookObject2.toString())
         setResult(Activity.RESULT_OK, intent)
         finish()
     }

@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.TextView
 import com.example.readinglistassignment.model.Book
 import com.example.readinglistassignment.R
+import kotlinx.android.synthetic.main.activity_edit_book.*
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -26,29 +27,30 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        const val RESULT_TAG = 999
+        const val NEW_BOOK = 999
         const val BOOK_CSV = "book csv"
+
 
 
     }
 
 
-    val listOfBooks = mutableListOf<Book>(
+    val listOfBooks = mutableListOf<Book>()
 
-        Book(
-            "Childhoods End",
-            "Created in the 50s this book was an inspiration for Independence day the movie ",
-            true, "007"
-        ),
-        Book(
-            "Ready Player One",
-            "It is chock full of 80s references",
-            true,
-            "9000"
-        )
+    /* Book(
+         "Childhoods End",
+         "Created in the 50s this book was an inspiration for Independence day the movie ",
+         true, "007"
+     ),
+     Book(
+         "Ready Player One",
+         "It is chock full of 80s references",
+         true,
+         "9000"
+     )
 
 
-    )
+ )*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             val intent = Intent(this, EditBookActivity::class.java)
             intent.putExtra("ID", scrollView.childCount.toString())
-            startActivityForResult(intent, RESULT_TAG)
+            startActivityForResult(intent, NEW_BOOK)
 
         }
     }
@@ -118,34 +120,51 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == RESULT_TAG) {
-            var csv = data?.getStringExtra("csv")
 
+        if (resultCode == Activity.RESULT_OK) {
+            var csv = data?.getStringExtra("csv")
             if (csv != null) {
-                var rBook = Book(csv)
-                idCheck(rBook)
+                val csvBook = Book(csv)
+
+                if (requestCode == NEW_BOOK){
+
+                    var hasBeenFound = false
+
+                    for(i in 0 until listOfBooks.size) {
+
+                        if (listOfBooks[i].id == csvBook.id) {
+
+                            listOfBooks[i].hasBeenRead = csvBook.hasBeenRead
+                            listOfBooks[i].reasonToRead = csvBook.reasonToRead
+                            listOfBooks[i].title = csvBook.title
+                            hasBeenFound = true
+                        }
+
+                    }
+
+                    if (!hasBeenFound){
+                        listOfBooks.add(csvBook)
+                    }
+
+                   loadViews()
+                }
 
             }
-
-
         }
     }
 
-    fun idCheck (book: Book){
-        var num = 0
+    fun loadViews() {
 
-        for (i in 0 until listOfBooks.size){
-            if (book.id == listOfBooks[i].id){
-                listOfBooks[i] = book
-                linear_layout_list.removeViewAt(i)
-                linear_layout_list.addView(buildItemView(book), i)
-                num++
-            }
+        linear_layout_list.removeAllViews()
+
+        for (i in 0 until listOfBooks.size) {
+            listOfBooks[i].id = linear_layout_list.childCount.toString()
+            linear_layout_list.addView(buildItemView(listOfBooks[i]))
+
+
         }
 
-        if (num == 0){
-            linear_layout_list.addView(buildItemView(book))
-        }
+
     }
 
 
