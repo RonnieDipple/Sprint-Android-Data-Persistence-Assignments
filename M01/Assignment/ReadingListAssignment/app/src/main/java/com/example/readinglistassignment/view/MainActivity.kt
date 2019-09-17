@@ -1,8 +1,8 @@
 package com.example.readinglistassignment.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -25,7 +25,16 @@ Be sure to add all views returned from your `buildItemView` method to the Scroll
 class MainActivity : AppCompatActivity() {
 
 
+    companion object {
+        const val RESULT_TAG = 999
+        const val BOOK_CSV = "book csv"
+
+
+    }
+
+
     val listOfBooks = mutableListOf<Book>(
+
         Book(
             "Childhoods End",
             "Created in the 50s this book was an inspiration for Independence day the movie ",
@@ -47,7 +56,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        for (book in listOfBooks){
+
+
+        for (book in listOfBooks) {
             linear_layout_list.addView(buildItemView(book))
         }
 
@@ -67,7 +78,9 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { view ->
             val intent = Intent(this, EditBookActivity::class.java)
-            startActivity(intent)
+            intent.putExtra("ID", scrollView.childCount.toString())
+            startActivityForResult(intent, RESULT_TAG)
+
         }
     }
 
@@ -88,18 +101,52 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
     fun buildItemView(book: Book): View {
 
         val myView = TextView(this)
+        val id = book.id
         myView.text = book.title
         myView.textSize = 15f
+        myView.setOnClickListener {
+            val intent = Intent(this, EditBookActivity::class.java)
+            intent.putExtra(BOOK_CSV, book.toString())
+        }
         return myView
 
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == RESULT_TAG) {
+            var csv = data?.getStringExtra("csv")
+
+            if (csv != null) {
+                var rBook = Book(csv)
+                idCheck(rBook)
+
+            }
+
+
+        }
+    }
+
+    fun idCheck (book: Book){
+        var num = 0
+
+        for (i in 0 until listOfBooks.size){
+            if (book.id == listOfBooks[i].id){
+                listOfBooks[i] = book
+                linear_layout_list.removeViewAt(i)
+                linear_layout_list.addView(buildItemView(book), i)
+                num++
+            }
+        }
+
+        if (num == 0){
+            linear_layout_list.addView(buildItemView(book))
+        }
+    }
 
 
 }
