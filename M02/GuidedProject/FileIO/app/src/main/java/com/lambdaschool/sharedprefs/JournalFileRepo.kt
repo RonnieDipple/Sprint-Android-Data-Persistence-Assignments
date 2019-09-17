@@ -15,11 +15,14 @@ class JournalFileRepo(var context: Context?): JournalRepoInterface {
     // TODO 6: createEntry implementation
     override fun createEntry(entry: JournalEntry) {
         val entryString = entry.toJsonObject()
-        val filename = context.whichDir
+        val filename = entry.date
         writeToFile(filename, entryString)
     }
 
     // TODO 8: writeToFile helper
+    private fun writeToFile(filename: String, entryString: String){
+        //figureOutDirectory
+    }
 
     // TODO 9: Save storage directory as a member variable
 

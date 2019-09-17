@@ -32,16 +32,25 @@ class JournalEntry : Serializable {
     // TODO 11: Write constructor from JSONObject
 
     // TODO 7: Implement toJSONObject method
-    fun toJsonObject(): JSONObject {
+    fun toJsonObject(): JSONObject? {
         try {
             return JSONObject().apply {
                 put("date", date)
                 put("entry_text", entryText)
                 put("image", image)
                 put("day_rating", dayRating)
+                put("id", id)
+
             }
-        } catch (e: JSONException) {
-            return
+        } catch (e1: JSONException) {
+            return try {
+                JSONObject("{\"date\" : \"$date\", \"entry_text\" : \"$entryText\", \"image\": \"$image\", \"day_rating\": \"$dayRating\", \"id\": \"$id\"}")
+
+
+            }catch (e2: JSONException){
+                e2.printStackTrace()
+                return null
+            }
         }
 
     }

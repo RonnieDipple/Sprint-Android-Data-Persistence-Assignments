@@ -35,7 +35,7 @@ C. Accept Data
 
 class EditBookActivity : AppCompatActivity() {
 
-    lateinit var bookObject: Book
+     var bookObject = Book("", "", true, "")
 
     override fun onBackPressed() {
         returnData()
@@ -69,8 +69,8 @@ class EditBookActivity : AppCompatActivity() {
 
     fun returnData() {
         val bookObject2 = Book(
-            edit_text_book_title.toString(),
-            edit_text_reason.toString(),
+            edit_text_book_title.text.toString(),
+            edit_text_reason.text.toString(),
             true,
             bookObject.id!!
         )
