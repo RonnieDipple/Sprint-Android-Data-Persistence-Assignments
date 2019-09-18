@@ -26,11 +26,10 @@ Now that we have a functioning app, we need to add our persistence to it. To do 
 9. This method will check to see if the provided book is new or an updated version of the same book, if it is new, it will add the id to the list of active ids and increment the next id. The method will then store the book using its id as the key.
 10. Build your app to make sure it compiles properly.*/
 
-class SharedPrefsDao(context: Context){
+class SharedPrefsDao(context: Context) {
 
 
-
-    companion object{
+    companion object {
         const val ID_LIST_RETRIEVAL = "id list retrieval"
         const val NEXT_ID_RETRIEVAL = "next id retrieval"
         const val DAOPREFERENCES = "preferences"
@@ -40,9 +39,7 @@ class SharedPrefsDao(context: Context){
     }
 
 
-
-
-    fun getALLBOOKIds(retrieval : String): String{
+    fun getALLBOOKIds(retrieval: String): String {
         if (retrieval == ID_LIST_RETRIEVAL) {
             return MainActivity.preferences.toString()
 
@@ -53,7 +50,7 @@ class SharedPrefsDao(context: Context){
     }
 
 
-    fun getNextId(retrieval : String): String{
+    fun getNextId(retrieval: String): String {
         if (retrieval == NEXT_ID_RETRIEVAL) {
             return MainActivity.preferences.toString()
         }
@@ -62,23 +59,23 @@ class SharedPrefsDao(context: Context){
 
     }
 
-    fun bookIdToCsv(id: String): String?{
+    fun bookIdToCsv(id: String): String? {
         return MainActivity.preferences.getString(id, "")
     }
 
-    fun updateBook(book: Book){
+    fun updateBook(book: Book) {
 
         //indices Returns the index of the last item in the list or -1 if the list is empty
 
         var updated = false
-        for (i in MainActivity.listOfBooks.indices){
-            if (MainActivity.listOfBooks[i].id == book.id){
+        for (i in MainActivity.listOfBooks.indices) {
+            if (MainActivity.listOfBooks[i].id == book.id) {
                 MainActivity.listOfBooks[i] = book
                 updated = true
             }
         }
 
-        if (!updated){
+        if (!updated) {
             MainActivity.listOfBooks.add(book)
         }
     }
