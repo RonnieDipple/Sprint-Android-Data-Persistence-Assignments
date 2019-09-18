@@ -30,6 +30,50 @@ class JournalEntry : Serializable {
     }
 
     // TODO 11: Write constructor from JSONObject
+    constructor(jsonObject: JSONObject){
+
+        try {
+
+
+            this.date = jsonObject.getString("date")
+        }catch (e: JSONException){
+            this.date = (Date().time /100).toString()
+        }
+
+        try {
+            this.entryText = jsonObject.getString("entry_text")
+        }catch (e: JSONException){
+            this.entryText = ""
+        }
+
+        try {
+
+            this.image = jsonObject.getString("image")
+        }catch (e: JSONException){
+
+            this.image = ""
+
+        }
+
+        try {
+
+            this.dayRating = jsonObject.getInt("day_Rating")
+        }catch (e: JSONException){
+            this.dayRating = 0
+
+        }
+
+        try {
+
+            this.id = jsonObject.getInt("id")
+        }catch (e: JSONException){
+
+            this.id = -1
+
+        }
+
+
+    }
 
     // TODO 7: Implement toJSONObject method
     fun toJsonObject(): JSONObject? {
@@ -97,7 +141,7 @@ class JournalEntry : Serializable {
         val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US)
         val date = Date()
 
-        this.date = dateFormat.format(date)
+        this.date = (date.time / 100).toString()
     }
 
     fun getImage(): Uri? {
