@@ -20,7 +20,7 @@ package com.example.readinglistassignment.model
 
 class Book {
     override fun toString(): String {
-        return "$title , $reasonToRead , ${hasBeenRead.toString()}"
+        return "$id, $title , $reasonToRead , ${hasBeenRead.toString()}"
     }
 
     var title: String? = null

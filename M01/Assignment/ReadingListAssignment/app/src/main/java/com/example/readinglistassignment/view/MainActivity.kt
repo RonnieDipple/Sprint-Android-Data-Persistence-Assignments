@@ -1,7 +1,9 @@
 package com.example.readinglistassignment.view
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
@@ -25,17 +27,20 @@ Be sure to add all views returned from your `buildItemView` method to the Scroll
 
 class MainActivity : AppCompatActivity() {
 
-
     companion object {
+
         const val NEW_BOOK = 999
         const val BOOK_CSV = "book csv"
+        const val MY_PREF = "preferences"
+        lateinit var preferences: SharedPreferences
 
+
+
+
+        val listOfBooks = mutableListOf<Book>()
 
 
     }
-
-
-    val listOfBooks = mutableListOf<Book>()
 
     /* Book(
          "Childhoods End",
@@ -59,6 +64,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
 
+        preferences = this.getSharedPreferences(MY_PREF, Context.MODE_PRIVATE)
 
         for (book in listOfBooks) {
             linear_layout_list.addView(buildItemView(book))
@@ -166,6 +172,10 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
+
+
 
 
 }
