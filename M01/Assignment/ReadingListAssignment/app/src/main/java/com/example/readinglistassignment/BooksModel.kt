@@ -20,6 +20,7 @@ class BooksModel {
     }
 
     fun passToUpdateBook(book: Book){
-        
+        SharedPrefsDao.updateBook(book)
+
     }
 }

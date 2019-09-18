@@ -20,7 +20,7 @@ package com.example.readinglistassignment.model
 
 class Book {
     override fun toString(): String {
-        return "$id, $title , $reasonToRead , ${hasBeenRead.toString()}"
+        return "$id,$title,$reasonToRead,${hasBeenRead.toString()}"
     }
 
     var title: String? = null
@@ -41,14 +41,13 @@ class Book {
     }
 
     constructor(
-        csvString: String
+        csvString: String){
 
-    )
-
-   {val splitString = csvString.split(" ,")
-       this.title = splitString[0]
-       this.reasonToRead = splitString[1]
-       when (splitString[2]){
+        val splitString = csvString.split(",")
+        this.id = splitString[0]
+       this.title = splitString[1]
+       this.reasonToRead = splitString[2]
+       when (splitString[3]){
            "true"-> this.hasBeenRead = true
            else -> this.hasBeenRead = false
 

@@ -26,17 +26,17 @@ Now that we have a functioning app, we need to add our persistence to it. To do 
 9. This method will check to see if the provided book is new or an updated version of the same book, if it is new, it will add the id to the list of active ids and increment the next id. The method will then store the book using its id as the key.
 10. Build your app to make sure it compiles properly.*/
 
-class SharedPrefsDao(context: Context) {
+object SharedPrefsDao{
 
 
-    companion object {
+
         const val ID_LIST_RETRIEVAL = "id list retrieval"
         const val NEXT_ID_RETRIEVAL = "next id retrieval"
         const val DAOPREFERENCES = "preferences"
         const val BOOK_CREATED = "BOOK"
 
 
-    }
+
 
 
     fun getALLBOOKIds(retrieval: String): String {

@@ -9,9 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.readinglistassignment.BooksController
 import com.example.readinglistassignment.model.Book
 import com.example.readinglistassignment.R
+import com.example.readinglistassignment.view.MainActivity.Companion.listOfBooks
 import kotlinx.android.synthetic.main.activity_edit_book.*
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,16 +30,13 @@ Be sure to add all views returned from your `buildItemView` method to the Scroll
 
 class MainActivity : AppCompatActivity() {
 
+
     companion object {
 
         const val NEW_BOOK = 999
         const val BOOK_CSV = "book csv"
         const val MY_PREF = "preferences"
         lateinit var preferences: SharedPreferences
-
-
-
-
         val listOfBooks = mutableListOf<Book>()
 
 
@@ -62,13 +62,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-
         preferences = this.getSharedPreferences(MY_PREF, Context.MODE_PRIVATE)
 
-        for (book in listOfBooks) {
-            linear_layout_list.addView(buildItemView(book))
-        }
 
         /*
         * TODO 4
@@ -109,73 +104,36 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun buildItemView(book: Book): View {
-
-        val myView = TextView(this)
-        val id = book.id
-        myView.text = book.title
-        myView.textSize = 15f
-        myView.setOnClickListener {
-            val intent = Intent(this, EditBookActivity::class.java)
-            intent.putExtra(BOOK_CSV, book.toString())
-        }
-        return myView
-
-
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
-            var csv = data?.getStringExtra("csv")
-            if (csv != null) {
-                val csvBook = Book(csv)
+        if (resultCode == Activity.RESULT_OK && requestCode == NEW_BOOK && data != null) {
+            BooksController().handleEditActivityResult(data)
+            loadViews()
 
-                if (requestCode == NEW_BOOK){
 
-                    var hasBeenFound = false
-
-                    for(i in 0 until listOfBooks.size) {
-
-                        if (listOfBooks[i].id == csvBook.id) {
-
-                            listOfBooks[i].hasBeenRead = csvBook.hasBeenRead
-                            listOfBooks[i].reasonToRead = csvBook.reasonToRead
-                            listOfBooks[i].title = csvBook.title
-                            hasBeenFound = true
-                        }
-
-                    }
-
-                    if (!hasBeenFound){
-                        listOfBooks.add(csvBook)
-                    }
-
-                   loadViews()
-                }
-
-            }
         }
+
     }
 
     fun loadViews() {
+
 
         linear_layout_list.removeAllViews()
 
         for (i in 0 until listOfBooks.size) {
             listOfBooks[i].id = linear_layout_list.childCount.toString()
-            linear_layout_list.addView(buildItemView(listOfBooks[i]))
+            linear_layout_list.addView(BooksController().buildItemView(linear_layout_list,listOfBooks[i]))
 
 
         }
 
 
     }
-
-
-
-
-
-
 }
+
+
+
+
+
+

@@ -44,8 +44,6 @@ class EditBookActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_book)
-
-
         val bookCsv = intent.getStringExtra(BOOK_CSV)
 
         if (bookCsv != null) {
@@ -74,7 +72,6 @@ class EditBookActivity : AppCompatActivity() {
             true,
             bookObject.id!!
         )
-
 
         val intent = Intent()
         intent.putExtra("csv", bookObject2.toString())
