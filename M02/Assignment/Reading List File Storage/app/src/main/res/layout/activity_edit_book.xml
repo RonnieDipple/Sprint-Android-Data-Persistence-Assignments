@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.readinglistfilestorage.view.EditBookActivity"
+    android:background="@android:color/holo_purple"
+    >
+
+    <EditText
+        android:textColor="@android:color/white"
+        android:hint="@string/title"
+        android:layout_marginTop="50sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/edit_text_book_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <EditText
+        android:textColor="@android:color/white"
+        android:layout_marginTop="50sp"
+        android:hint="@string/reason"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_book_title"
+        android:id="@+id/edit_text_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:id="@+id/checkbox"
+        android:src="@drawable/ic_check_box_outline_blank_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_reason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:text="Read"
+        android:id="@+id/text_view_read"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_reason"
+        app:layout_constraintStart_toEndOf="@id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+
+    <Button
+        app:layout_constraintStart_toEndOf="@id/button_submit"
+        android:text="cancel"
+        android:id="@+id/button_cancel"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_reason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <Button
+        android:id="@+id/button_submit"
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/button_cancel"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_reason"
+        app:layout_constraintStart_toEndOf="@id/text_view_read"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
