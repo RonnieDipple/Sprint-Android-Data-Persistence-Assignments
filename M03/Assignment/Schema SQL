@@ -1,0 +1,29 @@
+CREATE TABLE player(id INTEGER PRIMARY KEY,
+                    first_name TEXT,
+                    last_name TEXT,
+                    age INTEGER,
+                    team TEXT,
+                    FOREIGN KEY(team) REFERENCES teams);
+                    
+INSERT INTO player(id, first_name, last_name, age, team)
+VALUES(1,"Mark", "Noble", 32, "West Ham");
+
+INSERT INTO player(id, first_name, last_name, age, team)
+VALUES(300,"Paul", "Pogba", 26, "Manchester United");
+
+INSERT INTO player(id, first_name, last_name, age, team)
+VALUES(2,"Declan", "Rice", 22, "West Ham");
+
+                   
+CREATE TABLE teams(id INTEGER PRIMARY KEY,
+                   team_name TEXT, 
+                    location TEXT);
+
+INSERT INTO teams(id, team_name, location)
+VALUES(1, "West Ham", "London");
+
+
+INSERT INTO teams(id, team_name, location)
+VALUES(200, "Manchester United", "Manchester");
+
+
