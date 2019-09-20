@@ -1,0 +1,12 @@
+SELECT * FROM player;
+SELECT last_name FROM player;
+SELECT * FROM player WHERE age;
+SELECT age, first_name FROM player WHERE age >23;
+UPDATE player SET age=20 WHERE first_name LIKE "Dec%";
+SELECT * FROM player;
+DELETE FROM player WHERE first_name LIKE "Mar%";
+SELECT * FROM player;
+SELECT * FROM player WHERE age = 26;
+SELECT * FROM teams
+JOIN player ON teams.team_name = player.team
+
