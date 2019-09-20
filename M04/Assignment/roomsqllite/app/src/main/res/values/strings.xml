@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Room, SQLlite</string>
+    <string name="label_add_pet">Add A Pet</string>
+    <string name="label_pet_name">Pet Name</string>
+    <string name="label_owner_name_">Owner Name</string>
+    <string name="label_pet_type">Type(Dog, Cat, etc.)</string>
+    <string name="label_pet_breed">Breed</string>
+    <string name="label_pet_age">Age</string>
+    <string name="label_button_save">Save Pet</string>
+    <string name="label_button_view_data">View Data</string>
+    
+    <string name="message_must_be_valid">All fields need to be filled and age must be a valid number.</string>
+    <string name="message_pet_inserted">Pet inserted into database!</string>
+    <string name="message_no_data">No data in cache!</string>
+</resources>
